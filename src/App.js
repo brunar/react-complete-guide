@@ -22,11 +22,11 @@ const app = props => {
   //Handling Events with Methods - Event onClick
   //https://reactjs.org/docs/events.html#supported-events
   //Method
-  const switchNameHandler = () => {
+  const switchNameHandler = (newName) => {
     //console.log("Was clicked");
     setPersonsState({
       persons: [
-        { name: "Maximilian", age: 48 },
+        { name: newName, age: 48 },
         { name: "Manuelle", age: 29 },
         { name: "John", age: 35 }
       ]
@@ -35,9 +35,10 @@ const app = props => {
   }
   return (
     <div className="App">
-      <h1>Hi, I'm React App</h1>
+      <h1>Hi, I am React App</h1>
       <p>This is really working!</p>
-      <button onClick={switchNameHandler}>Switch Name</button>
+      <button onClick={() => switchNameHandler('Maximilian!!')}>Switch Name</button>
+      {/* Anonymous Function inside onClick */}
       <Person
         name={personsState.persons[0].name}
         age={personsState.persons[0].age} />
@@ -47,16 +48,24 @@ const app = props => {
       <Person
         name={personsState.persons[2].name}
         age={personsState.persons[2].age}
-        click={switchNameHandler}>Hobbies: Racing</Person>
+        click={switchNameHandler.bind(this, 'Bruna!')}>Hobbies: Racing</Person>
 
       {/* click = is a property and pass a reference to this handler/Method 
         as a property to our component Persons.
-        
-        Pass methods as props so that you can call a method which might
+
+        Passing methods as props so that you can call a method which might
         change the state in another component which doesn't have direct access
         to the state and which shouldn't have direct access to the state.
 
-        Pass down click handlers allow you to change data in the parent component.
+        Passing down click handlers allow you to change data in the parent component.
+
+        Two ways of Bind:
+        //This way can be inefficient, react can re-render certain things.
+        onClick={() => return switchNameHandler('Maximilian')}  
+
+        //Recommend this way with bind
+        click={switchNameHandler.bind(this, 'Bruna!')} 
+        
         */}
     </div>
   );
