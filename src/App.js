@@ -31,12 +31,23 @@ const app = props => {
         { name: "John", age: 35 }
       ]
     })
+  }
 
+  const nameChangeHanler = (event) => {
+    setPersonsState({
+      persons: [
+        { name: "Max", age: 48 },
+        { name: event.target.value, age: 29 },
+        { name: "John", age: 35 }
+      ]
+    })
   }
   return (
     <div className="App">
       <h1>Hi, I am React App</h1>
       <p>This is really working!</p>
+      <p>Test it in the second input: Manuelle is changing the value of the input.</p>
+      <p>The error is because we did not set the logic in the first or last input.</p>
       <button onClick={() => switchNameHandler('Maximilian!!')}>Switch Name</button>
       {/* Anonymous Function inside onClick */}
       <Person
@@ -44,7 +55,8 @@ const app = props => {
         age={personsState.persons[0].age} />
       <Person
         name={personsState.persons[1].name}
-        age={personsState.persons[1].age} />
+        age={personsState.persons[1].age}
+        changed={nameChangeHanler} />
       <Person
         name={personsState.persons[2].name}
         age={personsState.persons[2].age}
@@ -65,7 +77,7 @@ const app = props => {
 
         //Recommend this way with bind
         click={switchNameHandler.bind(this, 'Bruna!')} 
-        
+
         */}
     </div>
   );
