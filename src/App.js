@@ -35,12 +35,29 @@ const app = props => {
   }
   return (
     <div className="App">
-      <h1>Hi, I'm React App  </h1>
+      <h1>Hi, I'm React App</h1>
       <p>This is really working!</p>
       <button onClick={switchNameHandler}>Switch Name</button>
-      <Person name={personsState.persons[0].name} age={personsState.persons[0].age} />
-      <Person name={personsState.persons[1].name} age={personsState.persons[1].age} />
-      <Person name={personsState.persons[2].name} age={personsState.persons[2].age}>Hobbies: Racing</Person>
+      <Person
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age} />
+      <Person
+        name={personsState.persons[1].name}
+        age={personsState.persons[1].age} />
+      <Person
+        name={personsState.persons[2].name}
+        age={personsState.persons[2].age}
+        click={switchNameHandler}>Hobbies: Racing</Person>
+
+      {/* click = is a property and pass a reference to this handler/Method 
+        as a property to our component Persons.
+        
+        Pass methods as props so that you can call a method which might
+        change the state in another component which doesn't have direct access
+        to the state and which shouldn't have direct access to the state.
+
+        Pass down click handlers allow you to change data in the parent component.
+        */}
     </div>
   );
 }
