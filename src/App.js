@@ -42,13 +42,25 @@ const app = props => {
       ]
     })
   }
+
+  //Inline Style - This is a Javascript way and has to be camelCase with Single Quotes and comma(,)
+  //Better used a global style, this case is to be used only if need apply to a single element or componet in a scope as exceptions
+  const styleit = {
+    backgroundColor: 'white',
+    font: 'inherit',
+    border: '2px solid blue',
+    padding: '8px',
+    cursor: 'pointer',
+    outline: 'none'
+  }
+
   return (
     <div className="App">
       <h1>Hi, I am React App</h1>
       <p>This is really working!</p>
       <p>Test it in the second input: Manuelle is changing the value of the input.</p>
       <p>The error is because we did not set the logic in the first or last input.</p>
-      <button onClick={() => switchNameHandler('Maximilian!!')}>Switch Name</button>
+      <button style={styleit} onClick={() => switchNameHandler('Maximilian!!')}>Switch Name</button>
       {/* Anonymous Function inside onClick */}
       <Person
         name={personsState.persons[0].name}
