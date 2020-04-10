@@ -52,37 +52,43 @@ class App extends Component {
     const styleit = {
       backgroundColor: 'white',
       font: 'inherit',
-      border: '2px solid blue',
+      border: '2px solid orange',
       padding: '8px',
       cursor: 'pointer',
       outline: 'none'
     }
 
+    //create a variable with first state null
+    let personsVar = null;
+
+    //Conditional
+    //State showPerson === true
+    if (this.state.showPersons) {
+      personsVar = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            changed={this.nameChangeHanler} />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            click={this.switchNameHandler.bind(this, 'Bruna!')}>Hobbies: Racing</Person>
+        </div>
+      )
+    }
+
     return (
       <div className="App">
-        <h1>Hi, I'm React App  </h1>
+        <h1>Hi, I'm React App </h1>
         <p>This is really working!</p>
-        <button style={styleit} onClick={this.togglePersonsHandler}>Menu Toogle</button>
-        {/* Ternary expression
-        something ? true : false
-        something === true ? React.createElement() true : false
-        if true show the block div, if false null
-        */}
-        {this.state.showPersons ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age} />
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              changed={this.nameChangeHanler} />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              click={this.switchNameHandler.bind(this, 'Bruna!')}>Hobbies: Racing</Person>
-          </div> : null
-        }
+        <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
+        {/********* And include a personsVar Conditional below 
+         * if true show div if false = null ********* */}
+        {personsVar}
       </div>
     );
   }
