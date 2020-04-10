@@ -1,34 +1,88 @@
 import React, { Component } from 'react';
 import './App.css';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
+import Person from './Person/Person';
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
 class App extends Component {
 
   state = {
-    username: 'supermax'
+    persons: [
+      { name: "Max", age: 28 },
+      { name: "Manu", age: 29 },
+      { name: "John", age: 35 }
+    ],
+    otherState: "some other value",
+    showPersons: false
   }
   //Handling Events with Methods - Event onClick
   //https://reactjs.org/docs/events.html#supported-events
   //Method
-  usernameChangeHandler = (event) => {
-    this.setState({ username: event.target.value })
+  switchNameHandler = (newName) => {
+    //console.log("Was clicked");
+    //DON'T DO THIS: this.state.persons[0].name = "Maximilian"
+    this.setState({
+      persons: [
+        { name: newName, age: 48 },
+        { name: "Manuelle", age: 29 },
+        { name: "John", age: 35 }
+      ]
+    })
+  }
+
+  nameChangeHanler = (event) => {
+    this.setState({
+      persons: [
+        { name: "Max", age: 48 },
+        { name: event.target.value, age: 29 },
+        { name: "John", age: 35 }
+      ]
+    })
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({ showPersons: !doesShow });
   }
 
   render() {
 
+    //Inline Style - This is a Javascript way and has to be camelCase with Single Quotes and comma(,)
+    //Better used a global style, this case is to be used only if need apply to a single element or componet in a scope as exceptions
+    const styleit = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '2px solid blue',
+      padding: '8px',
+      cursor: 'pointer',
+      outline: 'none'
+    }
+
     return (
       <div className="App">
-        <UserInput
-          changed={this.usernameChangeHandler}
-          currentName={this.state.username} />
-        <UserOutput userName={this.state.username} />
-        <UserOutput userName={this.state.username} />
-        <UserOutput userName="Max" />
-        {/* Case sensitive names as userName do not work in a normal html 
-        but this is jsx, looks like html but is not */}
+        <h1>Hi, I'm React App  </h1>
+        <p>This is really working!</p>
+        <button style={styleit} onClick={this.togglePersonsHandler}>Menu Toogle</button>
+        {/* Ternary expression
+        something ? true : false
+        something === true ? React.createElement() true : false
+        if true show the block div, if false null
+        */}
+        {this.state.showPersons ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age} />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              changed={this.nameChangeHanler} />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+              click={this.switchNameHandler.bind(this, 'Bruna!')}>Hobbies: Racing</Person>
+          </div> : null
+        }
       </div>
     );
   }
