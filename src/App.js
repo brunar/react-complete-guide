@@ -8,29 +8,15 @@ class App extends Component {
 
   state = {
     persons: [
-      { name: "Max", age: 28 },
-      { name: "Manu", age: 29 },
-      { name: "John", age: 35 }
+      { id: 'bawr1', name: "Max", age: 28 },
+      { id: 'phbr1', name: "Manu", age: 29 },
+      { id: 'br11', name: "John", age: 35 }
     ],
     otherState: "some other value",
     showPersons: false
   }
-  //Handling Events with Methods - Event onClick
-  //https://reactjs.org/docs/events.html#supported-events
-  //Method
-  switchNameHandler = (newName) => {
-    //console.log("Was clicked");
-    //DON'T DO THIS: this.state.persons[0].name = "Maximilian"
-    this.setState({
-      persons: [
-        { name: newName, age: 48 },
-        { name: "Manuelle", age: 29 },
-        { name: "John", age: 35 }
-      ]
-    })
-  }
 
-  nameChangeHanler = (event) => {
+  nameChangedHandler = (event) => {
     this.setState({
       persons: [
         { name: "Max", age: 48 },
@@ -38,6 +24,17 @@ class App extends Component {
         { name: "John", age: 35 }
       ]
     })
+  }
+
+  deletePersonHandler = (personIndex) => {
+    //IMPORTANT *** Updating State Immutably **** 
+    //const personsDel = this.state.persons; //BAD way - This is mutating the original data
+    //Good Practice - create a copy of your persons array before manipulating it
+    //const personsDel = this.state.persons.slice(); //Slice is a javascript way to create a new array, with the objects from the old array
+    const personsDel = [...this.state.persons]; //Better way Es6 with spread [...] to create a new array, with the objects from the old array
+
+    personsDel.splice(personIndex, 1); //get persons state array splice/delete, 1 element of the array, and tells which index by Arg
+    this.setState({ persons: personsDel })
   }
 
   togglePersonsHandler = () => {
@@ -66,25 +63,23 @@ class App extends Component {
     if (this.state.showPersons) {
       personsVar = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            changed={this.nameChangeHanler} />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            click={this.switchNameHandler.bind(this, 'Bruna!')}>Hobbies: Racing</Person>
+          {/* Map Js Array *
+          * personsArg and anonymous Function */}
+          {this.state.persons.map((personsArg, index) => {
+            return <Person
+              click={() => this.deletePersonHandler(index)}
+              name={personsArg.name}
+              age={personsArg.age}
+              key={personsArg.id} />
+          })}
         </div>
       )
     }
 
     return (
       <div className="App">
-        <h1>Hi, I'm React App </h1>
-        <p>This is really working!</p>
+        <h1>Hi, I am React App </h1>
+        <p>Click in each paragraph to delete/splice</p>
         <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
         {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
