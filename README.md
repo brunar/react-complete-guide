@@ -17,3 +17,13 @@ You can use this on both components created with **class and extends component**
 import Radium from 'radium';
 export default Radium(my-component-name);
 ```
+
+# Styled Components
+
+Styled Components is a popular package for react 
+
+### Install Package
+```sh
+yarn add styled-components
+npm install --save styled-components
+```

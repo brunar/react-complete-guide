@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium';
 import './App.css';
+import styled from 'styled-components';
 import Person from './Person/Person';
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
+
+const StyleButton = styled.button`
+      background-color: green;
+      color: white;
+      font: inherit;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      outline: none;
+
+      &:hover {
+        background-color: lightgreen;
+        color: black;
+      }
+`;
 
 class App extends Component {
 
@@ -52,23 +67,6 @@ class App extends Component {
 
   render() {
 
-    //Inline Style - This is a Javascript way and has to be camelCase with Single Quotes and comma(,)
-    //Better used a global style, this case is to be used only if need apply to a single element or componet in a scope as exceptions
-    const styleit = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: 'none',
-      padding: '12px',
-      cursor: 'pointer',
-      outline: 'none',
-      //Peseudo Classes has to be between semi-colon and the object{}
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
-
     //create a variable with first state null
     let personsVar = null;
 
@@ -90,11 +88,11 @@ class App extends Component {
         </div>
       )
       // Setting Styles Dynamically ********* here
-      styleit.backgroundColor = 'red';
-      styleit[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
+      // styleit.backgroundColor = 'red';
+      // styleit[':hover'] = {
+      //   backgroundColor: 'salmon',
+      //   color: 'black'
+      // }
     }
 
     //Can be let or const, because never assign new value in the array
@@ -110,22 +108,16 @@ class App extends Component {
 
 
     return (
-      // About <StyleRoot>
-      // Embbed whole application if are using Media Queries Inline Style. 
-      // This is unecessair for Pseudo Selectors, only for Media Queries
-      // Also Import it on top of the Page as { StyleRoot }
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I am React App </h1>
-          <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
-          <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
-          {/********* And include a personsVar Conditional below 
+      <div className="App">
+        <h1>Hi, I am React App </h1>
+        <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
+        <StyleButton onClick={this.togglePersonsHandler}>Toogle Persons</StyleButton>
+        {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
-          {personsVar}
-        </div>
-      </StyleRoot>
+        {personsVar}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
