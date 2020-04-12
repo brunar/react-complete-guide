@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import './App.css';
 import Person from './Person/Person';
 //The name of the component should be Uppercase (for components es6)
@@ -60,7 +61,12 @@ class App extends Component {
       border: 'none',
       padding: '12px',
       cursor: 'pointer',
-      outline: 'none'
+      outline: 'none',
+      //Peseudo Classes has to be between semi-colon and the object{}
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     //create a variable with first state null
@@ -85,6 +91,10 @@ class App extends Component {
       )
       // Setting Styles Dynamically ********* here
       styleit.backgroundColor = 'red';
+      styleit[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     //Can be let or const, because never assign new value in the array
@@ -112,4 +122,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
