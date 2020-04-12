@@ -1,97 +1,59 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person';
-//The name of the component should be Uppercase (for components es6)
-//Because elements starting with lowercase are native Html elements. 
+import Validation from './Validation/Validation';
+import Char from './Char/Char';
 
 class App extends Component {
 
   state = {
-    persons: [
-      { id: 'bawr1', name: "Max", age: 28 },
-      { id: 'phbr1', name: "Manu", age: 29 },
-      { id: 'br11', name: "John", age: 35 }
-    ],
-    otherState: "some other value",
-    showPersons: false
+    userInput: ''
   }
 
-  nameChangedHandler = (event, idArg) => {
-    const personId = this.state.persons.findIndex(p => {
-      return p.id === idArg;
-    }); //or .findIndex()
-
-    const personTarget = {
-      ...this.state.persons[personId]
-    };
-
-    personTarget.name = event.target.value;
-
-    const personsGroup = [...this.state.persons];
-    personsGroup[personId] = personTarget
-
-    this.setState({ persons: personsGroup })
+  inputChangedHandler = (event) => {
+    this.setState({ userInput: event.target.value });
   }
 
-  deletePersonHandler = (personIndex) => {
-    //IMPORTANT *** Updating State Immutably **** 
-    //const personsDel = this.state.persons; //BAD way - This is mutating the original data
-    //Good Practice - create a copy of your persons array before manipulating it
-    //const personsDel = this.state.persons.slice(); //Slice is a javascript way to create a new array, with the objects from the old array
-    const personsDel = [...this.state.persons]; //Better way Es6 with spread [...] to create a new array, with the objects from the old array
-
-    personsDel.splice(personIndex, 1); //get persons state array splice/delete, 1 element of the array, and tells which index by Arg
-    this.setState({ persons: personsDel })
-  }
-
-  togglePersonsHandler = () => {
-    const doesShow = this.state.showPersons;
-    this.setState({ showPersons: !doesShow });
+  deleteCharHandler = (idx) => {
+    const text = this.state.userInput.split('');
+    text.splice(idx, 1);
+    const updateText = text.join('');
+    this.setState({ userInput: updateText });
   }
 
   render() {
-
-    //Inline Style - This is a Javascript way and has to be camelCase with Single Quotes and comma(,)
-    //Better used a global style, this case is to be used only if need apply to a single element or componet in a scope as exceptions
-    const styleit = {
-      backgroundColor: 'white',
-      font: 'inherit',
-      border: '2px solid orange',
-      padding: '8px',
-      cursor: 'pointer',
-      outline: 'none'
-    }
-
-    //create a variable with first state null
-    let personsVar = null;
-
-    //Conditional
-    //State showPerson === true
-    if (this.state.showPersons) {
-      personsVar = (
-        <div>
-          {/* Map Js Array *
-          * personsArg and anonymous Function */}
-          {this.state.persons.map((personsArg, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={personsArg.name}
-              age={personsArg.age}
-              key={personsArg.id}
-              changed={(event) => this.nameChangedHandler(event, personsArg.id)} />
-          })}
-        </div>
-      )
-    }
+    //Map doesn't touch the original array. It gives you a new array which is stored in char list
+    const charList = this.state.userInput.split('').map((ch, index) => {
+      return <Char
+        character={ch}
+        key={index}
+        clicked={() => this.deleteCharHandler(index)} />
+    });
 
     return (
       <div className="App">
-        <h1>Hi, I am React App </h1>
-        <p>Click in each paragraph to delete/splice</p>
-        <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
-        {/********* And include a personsVar Conditional below 
-         * if true show div if false = null ********* */}
-        {personsVar}
+        <ol>
+          <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).</li>
+          <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
+          <li>Inside the ValidationComponent, either output "Text too short" or "Text long enough" depending on the text length (e.g. take 5 as a minimum length)</li>
+          <li>Create another component (=> CharComponent) and style it as an inline box (=> display: inline-block, padding: 16px, text-align: center, margin: 16px, border: 1px solid black).</li>
+          <li>Render a list of CharComponents where each CharComponent receives a different letter of the entered text (in the initial input field) as a prop.</li>
+          <li>When you click a CharComponent, it should be removed from the entered text.</li>
+        </ol>
+        <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
+
+        <hr />
+
+        <input type="text"
+          onChange={this.inputChangedHandler}
+          value={this.state.userInput} />
+
+        <p>{this.state.userInput}</p>
+
+        <Validation inputLength={this.state.userInput.length} />
+
+        {charList}
+
+        <p>Click in the box to delete character</p>
       </div>
     );
   }
