@@ -1,3 +1,11 @@
 .App {
   text-align: center;
 }
+
+.highlight {
+  color: red;
+}
+
+.thick {
+  font-weight: bold;
+}

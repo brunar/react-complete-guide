@@ -87,10 +87,22 @@ class App extends Component {
       styleit.backgroundColor = 'red';
     }
 
+    //Can be let or const, because never assign new value in the array
+    //let classes = ['highlight', 'thick'].join(' '); //Then bellow the output is: className={classes}
+    //OR this way, then bellow the output is: className={classes.join('')} as you can see
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('highlight');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('thick');
+    }
+
+
     return (
       <div className="App">
         <h1>Hi, I am React App </h1>
-        <p>Click in each paragraph to delete/splice</p>
+        <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
         <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
         {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
