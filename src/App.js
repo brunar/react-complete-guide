@@ -6,7 +6,7 @@ import Person from './Person/Person';
 //Because elements starting with lowercase are native Html elements. 
 
 const StyleButton = styled.button`
-      background-color: green;
+      background-color: ${props => props.alte ? 'red' : 'green'};
       color: white;
       font: inherit;
       border: none;
@@ -15,7 +15,7 @@ const StyleButton = styled.button`
       outline: none;
 
       &:hover {
-        background-color: lightgreen;
+        background-color: ${props => props.alte ? 'salmon' : 'lightgreen'};
         color: black;
       }
 `;
@@ -87,12 +87,6 @@ class App extends Component {
           })}
         </div>
       )
-      // Setting Styles Dynamically ********* here
-      // styleit.backgroundColor = 'red';
-      // styleit[':hover'] = {
-      //   backgroundColor: 'salmon',
-      //   color: 'black'
-      // }
     }
 
     //Can be let or const, because never assign new value in the array
@@ -111,7 +105,7 @@ class App extends Component {
       <div className="App">
         <h1>Hi, I am React App </h1>
         <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
-        <StyleButton onClick={this.togglePersonsHandler}>Toogle Persons</StyleButton>
+        <StyleButton alte={this.state.showPersons} onClick={this.togglePersonsHandler}>Toogle Persons</StyleButton>
         {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
         {personsVar}
