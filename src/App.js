@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Radium from 'radium';
+import Radium, { StyleRoot } from 'radium';
 import './App.css';
 import Person from './Person/Person';
 //The name of the component should be Uppercase (for components es6)
@@ -110,14 +110,20 @@ class App extends Component {
 
 
     return (
-      <div className="App">
-        <h1>Hi, I am React App </h1>
-        <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
-        <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
-        {/********* And include a personsVar Conditional below 
+      // About <StyleRoot>
+      // Embbed whole application if are using Media Queries Inline Style. 
+      // This is unecessair for Pseudo Selectors, only for Media Queries
+      // Also Import it on top of the Page as { StyleRoot }
+      <StyleRoot>
+        <div className="App">
+          <h1>Hi, I am React App </h1>
+          <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
+          <button style={styleit} onClick={this.togglePersonsHandler}>Toogle Persons</button>
+          {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
-        {personsVar}
-      </div>
+          {personsVar}
+        </div>
+      </StyleRoot>
     );
   }
 }

@@ -6,6 +6,7 @@ Radium is a popular package for react which allows us to use **Inline Styles Jav
 
 ### Install Package
 ```sh
+yarn add radium
 npm install --save radium
 ```
 
