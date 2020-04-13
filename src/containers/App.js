@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import styled from 'styled-components';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person/Person';
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
