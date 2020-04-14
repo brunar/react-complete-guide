@@ -1,24 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import styled from 'styled-components';
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit'
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
-
-const StyleButton = styled.button`
-      background-color: ${props => props.alte ? 'red' : 'green'};
-      color: white;
-      font: inherit;
-      border: none;
-      padding: 12px;
-      cursor: pointer;
-      outline: none;
-
-      &:hover {
-        background-color: ${props => props.alte ? 'salmon' : 'lightgreen'};
-        color: black;
-      }
-`;
 
 class App extends Component {
 
@@ -73,39 +58,18 @@ class App extends Component {
     //Conditional
     //State showPerson === true
     if (this.state.showPersons) {
-      personsVar = (
-        <div>
-          {/* Map Js Array *
-          * personsArg and anonymous Function */}
-          {this.state.persons.map((personsArg, index) => {
-            return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={personsArg.name}
-              age={personsArg.age}
-              key={personsArg.id}
-              changed={(event) => this.nameChangedHandler(event, personsArg.id)} />
-          })}
-        </div>
-      )
+      personsVar = <Persons
+        personsatt={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler} />
     }
-
-    //Can be let or const, because never assign new value in the array
-    //let classes = ['highlight', 'thick'].join(' '); //Then bellow the output is: className={classes}
-    //OR this way, then bellow the output is: className={classes.join('')} as you can see
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push('highlight');
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('thick');
-    }
-
 
     return (
       <div className="App">
-        <h1>Hi, I am React App </h1>
-        <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
-        <StyleButton alte={this.state.showPersons} onClick={this.togglePersonsHandler}>Toogle Persons</StyleButton>
+        <Cockpit
+          showPersonsPp={this.state.showPersons}
+          persons={this.state.persons}
+          clickedit={this.togglePersonsHandler} />
         {/********* And include a personsVar Conditional below 
          * if true show div if false = null ********* */}
         {personsVar}
