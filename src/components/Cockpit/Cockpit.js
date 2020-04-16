@@ -35,7 +35,7 @@ const cockpit = (props) => {
 
     return (
         <div className="Cockpit">
-            <h1>Hi, I am React App </h1>
+            <h1>{props.titlebr}</h1>
             <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
             <StyleButton alte={props.showPersonsPp} onClick={props.clickedit}>Toogle Persons</StyleButton>
         </div>
