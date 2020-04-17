@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
-import Cockpit from '../components/Cockpit/Cockpit'
+import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass'
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
@@ -110,7 +111,8 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      <WithClass>
+        {/* Example with Classes from Modules <WithClass classpro={Classes.App}></WithClass> */}
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }}>Remove Cockpit</button>
@@ -121,7 +123,7 @@ class App extends Component {
           clickedit={this.togglePersonsHandler} />
         ) : null}
         {personsVar}
-      </div>
+      </WithClass>
     );
   }
 }
