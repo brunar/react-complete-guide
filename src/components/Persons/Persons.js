@@ -11,7 +11,11 @@ class Personslist extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
-        if (nextProps.personsatt !== this.props.personsatt) {
+        if (
+            nextProps.personsatt !== this.props.personsatt ||
+            nextProps.changed !== this.props.changed ||
+            nextProps.clicked !== this.props.clicked
+        ) {
             return true;
         } else {
             return false;
