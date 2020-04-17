@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Aux from '../../../hoc/Aux';
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
 
@@ -23,12 +24,14 @@ width: 60%;
 class Person extends Component {
     render() {
         console.log('[Person.js] rendering...');
-        //Return many elements as Array [] - need to add a key and separate each element with comma,
-        return [
-            <p key="i1" onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>,
-            <p key="i2">{this.props.children}</p>,
-            <input key="i3" type="text" onChange={this.props.changed} value={this.props.name} />
-        ]
+        return (
+            //<div className="Person" style={styleResp}></div>
+            <Aux>
+                <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
+                <p>{this.props.children}</p>
+                <input type="text" onChange={this.props.changed} value={this.props.name} />
+            </Aux>
+        )
     }
 }
 
