@@ -44,8 +44,21 @@ class App extends Component {
   //console.log('[App.js] componentWillMount');
   //}
 
+  //Most Important hooks
   componentDidMount() {
     console.log('[App.js] componentDidMount')
+  }
+
+  //Can be use for performance improvements
+  shouldComponentUpdate() {
+    console.log('[App.js] shouldComponentUpdate');
+    //return false; //the toogle button won't work because it won't update the state; It's prevent the update
+    return true; //By default it's return true than you don't need use this lifecycle Component
+  }
+  //You can use a snapshot msg before this component lifecycle
+  //Most Important hooks
+  componentDidUpdate() {
+    console.log('[App.js] componetDidUpdate');
   }
 
   nameChangedHandler = (event, idArg) => {
