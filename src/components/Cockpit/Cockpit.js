@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyleButton = styled.button`
@@ -17,6 +17,11 @@ const StyleButton = styled.button`
 `;
 
 const cockpit = (props) => {
+    //More important and useful lifecycle hooks
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect');
+        //http request...
+    });
 
     //Can be let or const, because never assign new value in the array
     //let classes = ['highlight', 'thick'].join(' '); //Then bellow the output is: className={classes}
