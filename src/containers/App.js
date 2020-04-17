@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass'
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/WithClass'
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
@@ -111,8 +112,7 @@ class App extends Component {
     }
 
     return (
-      <WithClass>
-        {/* Example with Classes from Modules <WithClass classpro={Classes.App}></WithClass> */}
+      <Aux>
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }}>Remove Cockpit</button>
@@ -123,9 +123,10 @@ class App extends Component {
           clickedit={this.togglePersonsHandler} />
         ) : null}
         {personsVar}
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App); //Wrap here withClass and change for lowercase because is a function
+//export default withClass(App, classes.App); //Wrap here withClass and Modules CSS
