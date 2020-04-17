@@ -11,7 +11,12 @@ class Personslist extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log('[Persons.js] shouldComponentUpdate');
-        return true;
+        if (nextProps.personsatt !== this.props.personsatt) {
+            return true;
+        } else {
+            return false;
+        }
+        //return true;
     }
     //You can save some state in the Dom before update (like scroll position)
     getSnapshotBeforeUpdate(prevProps, prevState) {
