@@ -23,14 +23,12 @@ width: 60%;
 class Person extends Component {
     render() {
         console.log('[Person.js] rendering...');
-        return (
-            //<div className="Person" style={styleResp}></div>
-            <StyledDiv>
-                <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
-                <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name} />
-            </StyledDiv>
-        )
+        //Return many elements as Array [] - need to add a key and separate each element with comma,
+        return [
+            <p key="i1" onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>,
+            <p key="i2">{this.props.children}</p>,
+            <input key="i3" type="text" onChange={this.props.changed} value={this.props.name} />
+        ]
     }
 }
 
