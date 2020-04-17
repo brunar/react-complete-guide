@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Aux from '../../../hoc/Aux';
-import withClass from '../../../hoc/WithClass'
+import withClass from '../../../hoc/WithClass';
+import PropTypes from 'prop-types'; //This is a Package after yarn add prop-types --save
+
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
 
@@ -35,6 +37,18 @@ class Person extends Component {
         )
     }
 }
+
+//PropTypes is use to help to check the return data from props, help to show a error of data
+//Too see it in Action change the state age in App.js to string Example: age: '22'
+//And you will see an error because it expect a number from props not string
+//And help to validation props in big applications
+Person.propTypes = {
+    clicked: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+
 //fixing the props inputs by spreading props in hoc/Withclass.js
 export default withClass(Person);
 //export default withClass(Person, Classes.Person); //with Module Css Class

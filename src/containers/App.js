@@ -3,7 +3,8 @@ import './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
-import withClass from '../hoc/WithClass'
+import withClass from '../hoc/WithClass';
+
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
