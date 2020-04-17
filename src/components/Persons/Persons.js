@@ -24,6 +24,10 @@ class Personslist extends Component {
         console.log('[Persons.js] componentDidUpdate');
         console.log(snapshot);
     }
+    //Any code that needs to run right before the component is removed
+    componentWillUnmount() {
+        console.log('[Persons.js] componentWillUnmount');
+    }
 
     render() {
         console.log('[Persons.js] rendering...');

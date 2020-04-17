@@ -24,13 +24,22 @@ const cockpit = (props) => {
 
         setTimeout(() => {
             alert('Saved data to cloud!');
-        }, 1000)
+        }, 1000);
+        return () => {
+            console.log('[Cockpit.js] cleanup work in useEffect');
+        };
     }, []); //IMPORTANT see the comments bellow
     // [] - if null alert will render only once in the page when refresh
     // [props.persons] - alert will render only when change the state persons
     // if nothing - alert will render all the time every cycle
 
-    //useEffect(); //Can be used it many times..
+    //Can be used many times..
+    useEffect(() => {
+        console.log('[Cockpit.js] 2nd useEffect');
+        return () => {
+            console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+        }
+    });  // if nothing - alert will render all the time every cycle
 
     //Can be let or const, because never assign new value in the array
     //let classes = ['highlight', 'thick'].join(' '); //Then bellow the output is: className={classes}
