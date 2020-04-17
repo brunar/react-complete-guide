@@ -34,7 +34,8 @@ class App extends Component {
     ],
     otherState: "some other value",
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
   //Actually not use that too often
   static getDerivedStateFromProps(props, state) {
@@ -78,7 +79,13 @@ class App extends Component {
     const personsGroup = [...this.state.persons];
     personsGroup[personId] = personTarget
 
-    this.setState({ persons: personsGroup })
+    this.setState((prevState, props) => {
+      return {
+        persons: personsGroup,
+        changeCounter: prevState.changeCounter + 1
+        //see changeCounter updating on React Console , need to select App tag
+      };
+    });
   }
 
   deletePersonHandler = (personIndex) => {
