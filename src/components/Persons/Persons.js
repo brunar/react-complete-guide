@@ -3,6 +3,28 @@ import Person from './Person/Person'
 
 //Because map is a js no need to include the backets and the return, this is the shortcode Es6
 class Personslist extends Component {
+
+    // static getDerivedStateFromProps(props, state) {
+    //     console.log('[Persons.js] getDerivedStateFromProps');
+    //     return state;
+    // }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('[Persons.js] shouldComponentUpdate');
+        return true;
+    }
+    //You can save some state in the Dom before update (like scroll position)
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log('[Persons.js] getSnapshotBeforeUpdate');
+        //return null; //or a message
+        return { message: 'Snapshot!' };
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot);
+    }
+
     render() {
         console.log('[Persons.js] rendering...');
 
