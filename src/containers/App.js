@@ -5,8 +5,25 @@ import Cockpit from '../components/Cockpit/Cockpit'
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
 
-class App extends Component {
+// ******* Lifecycle in Action *******************
 
+class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+    //Old Syntax
+    //this.state = {
+    //   persons: [
+    //     { id: 'bawr1', name: "Max", age: 28 },
+    //     { id: 'phbr1', name: "Manu", age: 29 },
+    //     { id: 'br11', name: "John", age: 35 }
+    //   ],
+    //     otherState: "some other value",
+    //       showPersons: false
+    // }
+  }
+
+  //New Syntax Es6
   state = {
     persons: [
       { id: 'bawr1', name: "Max", age: 28 },
@@ -15,6 +32,20 @@ class App extends Component {
     ],
     otherState: "some other value",
     showPersons: false
+  }
+  //Actually not use that too often
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state; //Should return the updated state
+  }
+
+  //Will be removed in Future
+  //componentWillMount() {
+  //console.log('[App.js] componentWillMount');
+  //}
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount')
   }
 
   nameChangedHandler = (event, idArg) => {
@@ -51,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js] render');
     //create a variable with first state null
     let personsVar = null;
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
@@ -21,7 +21,7 @@ width: 60%;
 `;
 
 const person = (props) => {
-
+    console.log('[Person.js] rendering...')
     return (
         //<div className="Person" style={styleResp}></div>
         <StyledDiv>
