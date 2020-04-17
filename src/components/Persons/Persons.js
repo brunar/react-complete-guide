@@ -1,27 +1,27 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person'
 
 //Because map is a js no need to include the backets and the return, this is the shortcode Es6
-class Personslist extends Component {
+class Personslist extends PureComponent {
 
     // static getDerivedStateFromProps(props, state) {
     //     console.log('[Persons.js] getDerivedStateFromProps');
     //     return state;
     // }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('[Persons.js] shouldComponentUpdate');
-        if (
-            nextProps.personsatt !== this.props.personsatt ||
-            nextProps.changed !== this.props.changed ||
-            nextProps.clicked !== this.props.clicked
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-        //return true;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('[Persons.js] shouldComponentUpdate');
+    //     if (
+    //         nextProps.personsatt !== this.props.personsatt ||
+    //         nextProps.changed !== this.props.changed ||
+    //         nextProps.clicked !== this.props.clicked
+    //     ) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     //You can save some state in the Dom before update (like scroll position)
     getSnapshotBeforeUpdate(prevProps, prevState) {
         console.log('[Persons.js] getSnapshotBeforeUpdate');
