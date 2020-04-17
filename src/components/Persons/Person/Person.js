@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
-import Aux from '../../../hoc/Aux';
+
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
 
@@ -26,11 +26,13 @@ class Person extends Component {
         console.log('[Person.js] rendering...');
         return (
             //<div className="Person" style={styleResp}></div>
-            <Aux>
+
+            //<React.Fragment></React.Fragment> Or This syntx don't need import Fragment to the top
+            <Fragment>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input type="text" onChange={this.props.changed} value={this.props.name} />
-            </Aux>
+            </Fragment>
         )
     }
 }
