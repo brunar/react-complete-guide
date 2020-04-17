@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Aux from '../../../hoc/Aux';
-
+import withClass from '../../../hoc/WithClass'
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
 
@@ -35,5 +35,6 @@ class Person extends Component {
         )
     }
 }
-
-export default Person;
+//fixing the props inputs by spreading props in hoc/Withclass.js
+export default withClass(Person);
+//export default withClass(Person, Classes.Person); //with Module Css Class
