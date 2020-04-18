@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import AuthContext from '../../context/auth-context';
 
@@ -19,6 +19,7 @@ const StyleButton = styled.button`
 
 const cockpit = (props) => {
     const toggleBtnRef = useRef(null);
+    const authContextBr = useContext(AuthContext); // Name Object that you imported in the top
 
     //More important and useful lifecycle hooks
     useEffect(() => {
@@ -67,10 +68,8 @@ const cockpit = (props) => {
             <h1>{props.titlebr}</h1>
             <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
             <StyleButton ref={toggleBtnRef} alte={props.showPersonsPp} onClick={props.clickedit}>Toogle Persons</StyleButton>
-            <AuthContext.Consumer>
-                {(context) => <button onClick={context.login}>Log in</button>}
-            </AuthContext.Consumer>
-
+            {/* here call the const authContextBr */}
+            <button onClick={authContextBr.login}>Log in</button>
         </div>
     );
 }

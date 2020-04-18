@@ -32,9 +32,13 @@ class Person extends Component {
         this.inputElementRef = React.createRef();
     }
 
+    //Better way can be used in lifecycle Hooks and in JSX Element down on return
+    static contextType = AuthContext; //New Way to use context coming from New React 16.6 
+
     componentDidMount() {
         //this.inputElement.focus();
         this.inputElementRef.current.focus();
+        console.log(this.context.authenticated); //this.context coming from New React 16.6
     }
 
     render() {
@@ -42,11 +46,7 @@ class Person extends Component {
         return (
             //<div className="Person" style={styleResp}></div>
             <Aux>
-                <AuthContext.Consumer>
-                    {(context) =>
-                        context.authenticated ? <p>Authenticated!</p> : <p>Please Log in</p>
-                    }
-                </AuthContext.Consumer>
+                {this.context.authenticated ? (<p>Authenticated!</p>) : (<p>Please Log in</p>)}
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input type="text"
