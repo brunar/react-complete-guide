@@ -66,6 +66,7 @@ const cockpit = (props) => {
             <h1>{props.titlebr}</h1>
             <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
             <StyleButton ref={toggleBtnRef} alte={props.showPersonsPp} onClick={props.clickedit}>Toogle Persons</StyleButton>
+            <button onClick={props.login}>Log in</button>
         </div>
     );
 }

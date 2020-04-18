@@ -36,7 +36,8 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   }
   //Actually not use that too often
   static getDerivedStateFromProps(props, state) {
@@ -105,6 +106,10 @@ class App extends Component {
     this.setState({ showPersons: !doesShow });
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  }
+
   render() {
     console.log('[App.js] render');
     //create a variable with first state null
@@ -116,7 +121,8 @@ class App extends Component {
       personsVar = <Persons
         personsatt={this.state.persons}
         clicked={this.deletePersonHandler}
-        changed={this.nameChangedHandler} />
+        changed={this.nameChangedHandler}
+        isAuthenticated={this.state.authenticated} />
     }
 
     return (
@@ -128,7 +134,8 @@ class App extends Component {
           titlebr={this.props.appTitle}
           showPersonsPp={this.state.showPersons}
           personsLength={this.state.persons.length}
-          clickedit={this.togglePersonsHandler} />
+          clickedit={this.togglePersonsHandler}
+          login={this.loginHandler} />
         ) : null}
         {personsVar}
       </Aux>
