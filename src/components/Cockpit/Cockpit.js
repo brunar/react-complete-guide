@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const StyleButton = styled.button`
@@ -17,14 +17,18 @@ const StyleButton = styled.button`
 `;
 
 const cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
+
     //More important and useful lifecycle hooks
     useEffect(() => {
         console.log('[Cockpit.js] useEffect');
         //http request...
         //Runs when component is mounted
-        setTimeout(() => {
-            alert('Saved data to cloud!');
-        }, 1000);
+        // setTimeout(() => {
+        //     alert('Saved data to cloud!');
+        // }, 1000);
+        //Runs only once because the last []
+        toggleBtnRef.current.click();
         //Runs when componet is unmounts
         return () => {
             console.log('[Cockpit.js] cleanup work in useEffect');
@@ -61,7 +65,7 @@ const cockpit = (props) => {
         <div className="Cockpit">
             <h1>{props.titlebr}</h1>
             <p className={classes.join(' ')}>Click in each paragraph to delete/splice</p>
-            <StyleButton alte={props.showPersonsPp} onClick={props.clickedit}>Toogle Persons</StyleButton>
+            <StyleButton ref={toggleBtnRef} alte={props.showPersonsPp} onClick={props.clickedit}>Toogle Persons</StyleButton>
         </div>
     );
 }
