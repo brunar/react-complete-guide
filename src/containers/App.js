@@ -4,6 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/WithClass';
+import AuthContext from '../context/auth-context'
 
 //The name of the component should be Uppercase (for components es6)
 //Because elements starting with lowercase are native Html elements. 
@@ -130,14 +131,21 @@ class App extends Component {
         <button onClick={() => {
           this.setState({ showCockpit: false });
         }}>Remove Cockpit</button>
-        {this.state.showCockpit ? (<Cockpit
-          titlebr={this.props.appTitle}
-          showPersonsPp={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clickedit={this.togglePersonsHandler}
-          login={this.loginHandler} />
-        ) : null}
-        {personsVar}
+
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (<Cockpit
+            titlebr={this.props.appTitle}
+            showPersonsPp={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clickedit={this.togglePersonsHandler} />
+          ) : null}
+          {personsVar}
+        </AuthContext.Provider>
       </Aux>
     );
   }

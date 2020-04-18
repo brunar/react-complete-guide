@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Aux from '../../../hoc/Aux';
 import withClass from '../../../hoc/WithClass';
 import PropTypes from 'prop-types'; //This is a Package after yarn add prop-types --save
+import AuthContext from '../../../context/auth-context';
 
 //import './Person.css'; //Need the file extension .css You can only omit it for javascript files.
 //External CSS  are injected dynamically by webpack, than becames internal and It automatically prefix for many browsers
@@ -41,7 +42,11 @@ class Person extends Component {
         return (
             //<div className="Person" style={styleResp}></div>
             <Aux>
-                {this.props.isAuth ? <p>Authenticated!</p> : <p>Please Log in</p>}
+                <AuthContext.Consumer>
+                    {(context) =>
+                        context.authenticated ? <p>Authenticated!</p> : <p>Please Log in</p>
+                    }
+                </AuthContext.Consumer>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
                 <input type="text"
