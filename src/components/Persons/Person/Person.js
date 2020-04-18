@@ -25,6 +25,11 @@ width: 60%;
 `;
 
 class Person extends Component {
+
+    componentDidMount() {
+        this.inputElement.focus();
+    }
+
     render() {
         console.log('[Person.js] rendering...');
         return (
@@ -32,7 +37,10 @@ class Person extends Component {
             <Aux>
                 <p onClick={this.props.click}>I'm a {this.props.name} and I'm {this.props.age} years old!</p>
                 <p>{this.props.children}</p>
-                <input type="text" onChange={this.props.changed} value={this.props.name} />
+                <input type="text"
+                    ref={(inputEl) => { this.inputElement = inputEl }}
+                    onChange={this.props.changed}
+                    value={this.props.name} />
             </Aux>
         )
     }
